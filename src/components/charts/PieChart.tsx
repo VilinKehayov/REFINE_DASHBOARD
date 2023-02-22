@@ -1,9 +1,11 @@
-import React from 'react'
+import React from "react";
+import { Box, Typography, Stack } from "@pankod/refine-mui";
+import {PieChartProps} from 'interfaces/home'
 
-const PieChart = () => {
-  return (
-    <div>PieChart</div>
-  )
-}
+const PieChart = ({ title, value, series, colors }: PieChartProps) => {
+  return <Box>
 
-export default PieChart
+  </Box>;
+};
+
+export default PieChart;
