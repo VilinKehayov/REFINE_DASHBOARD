@@ -139,6 +139,50 @@ const Form = ({
               />
             </FormControl>
           </Stack>
+
+          <FormControl>
+            <FormHelperText
+              sx={{
+                fontWeight: 500,
+                margin: "10px 0",
+                fontSize: 16,
+                color: "#11142d",
+              }}
+            >
+              Enter Location
+            </FormHelperText>
+            <TextField
+              fullWidth
+              required
+              id="outlined-basic"
+              color="info"
+              variant="outlined"
+              {...register("location", { required: true })}
+            />
+          </FormControl>
+          <Stack direction="column" gap={2} justifyContent="center" mb={2}>
+            <Stack direction="row" gap={2}>
+              <Typography
+                color="#11142d"
+                fontSize={16}
+                fontWeight={500}
+                my="10px"
+              >
+                Property Photo
+              </Typography>
+              <Button
+                component="label"
+                sx={{
+                  width: "fit-content",
+                  color: "#2ed480",
+                  textTransform: "capitalize",
+                  fontSize: 16,
+                }}
+              >
+                Upload *
+              </Button>
+            </Stack>
+          </Stack>
         </form>
       </Box>
     </Box>
