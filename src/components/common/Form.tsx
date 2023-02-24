@@ -180,9 +180,31 @@ const Form = ({
                 }}
               >
                 Upload *
+                <input
+                  hidden
+                  accept="image/*"
+                  type="file"
+                  onChange={(e) => {
+                    //@ts-ignore
+                    handleImageChange(e.target.files[0]);
+                  }}
+                />
               </Button>
             </Stack>
+            <Typography
+              fontSize={14}
+              color="#808191"
+              sx={{ wordBreak: "break-all" }}
+            >
+              {propertyImage?.name}
+            </Typography>
           </Stack>
+          <CustomButton
+            type="submit"
+            title={formLoading ? "Submiting..." : "Submit"}
+            backgroundColor="#475be8"
+            color="#fcfcfc"
+          />
         </form>
       </Box>
     </Box>
