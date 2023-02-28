@@ -61,13 +61,18 @@ function App() {
           })
         })
         const data = await response.json();
-        localStorage.setItem(
-          "user",
-          JSON.stringify({
-            ...profileObj,
-            avatar: profileObj.picture,
-          })
-        );
+        if (response.status === 200) {
+          localStorage.setItem(
+            "user",
+            JSON.stringify({
+              ...profileObj,
+              avatar: profileObj.picture,
+              userid: data._id
+            })
+          );
+        } else {
+          return Promise.reject();
+        }
       }
 
       
