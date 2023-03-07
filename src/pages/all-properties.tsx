@@ -104,7 +104,35 @@ const AllProperties = () => {
         ))}
         ;
       </Box>
-      
+
+      {allProperties.length > 0 && (
+        <Box display="flex" gap={2} mt={3} flexWrap="wrap">
+          <CustomButton
+            title="Previous"
+            handleClick={() => setCurrent((prev) => prev - 1)}
+            backgroundColor="#475be8"
+            color="#fcfcfc"
+            disabled={!(current > 1)}
+          />
+          <Box
+            display={{ xs: "hidden", sm: "flex" }}
+            alignItems="center"
+            gap="5px"
+          >
+            Page{" "}
+            <strong>
+              {current} of {pageCount}
+            </strong>
+          </Box>
+          <CustomButton
+            title="Next"
+            handleClick={() => setCurrent((prev) => prev + 1)}
+            backgroundColor="#475be8"
+            color="#fcfcfc"
+            disabled={current === pageCount}
+          />
+        </Box>
+      )}
     </Box>
   );
 };
