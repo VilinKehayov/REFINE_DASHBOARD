@@ -25,7 +25,6 @@ const AllProperties = () => {
     filters,
     setFilters,
   } = useTable();
-  console.log(data);
   const allProperties = data?.data ?? [];
 
   const currentPrice = sorter.find((item) => item.field === "price")?.order;
@@ -174,7 +173,7 @@ const AllProperties = () => {
             required
             inputProps={{ "aria-label": "Without label" }}
             defaultValue={10}
-            onChange={() => {}}
+            onChange={(e) => setPageSize(e.target.value ? Number(e.target.value): 10)}
           >
             {[10, 20, 30, 40, 50].map((size) => (
               <MenuItem key={size} value={size}>
