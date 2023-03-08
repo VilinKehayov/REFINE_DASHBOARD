@@ -22,7 +22,7 @@ const AllProperties = () => {
     pageCount,
     sorter,
     setSorter,
-    filter,
+    filters,
     setFilters,
   } = useTable();
   console.log(data);
@@ -35,11 +35,11 @@ const AllProperties = () => {
   };
 
   const currentFilterValues = useMemo(() => {
-    const logicalFilter = filters.flatMap((item) =>
+    const logicalFilters = filters.flatMap((item) =>
       "field" in item ? item : []
     );
     return {
-      title: logicalFilter.find((item) => item.field === "title")?.value || "",
+      title: logicalFilters.find((item) => item.field === "title")?.value || "",
       propertyType: logicalFilters.find((item)=> item.field === "propertyType")?.value || "",
     };
   }, [filters]);
