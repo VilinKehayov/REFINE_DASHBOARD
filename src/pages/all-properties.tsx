@@ -10,6 +10,7 @@ import {
 } from "@pankod/refine-mui";
 import { useNavigate } from "@pankod/refine-react-router-v6";
 import { PropertyCard, CustomButton } from "components";
+import { useMemo } from "react";
 
 const AllProperties = () => {
   const navigate = useNavigate();
@@ -26,6 +27,22 @@ const AllProperties = () => {
   } = useTable();
   console.log(data);
   const allProperties = data?.data ?? [];
+
+  const currentPrice = sorter.find((item) => item.field === "price")?.order;
+
+  const toggleSort = (field: string) => {
+    setSorter([{ field, order: currentPrice === "asc" ? "desc" : "asc" }]);
+  };
+
+  const currentFilterValues = useMemo(() => {
+    const logicalFilter = filters.flatMap((item) =>
+      "field" in item ? item : []
+    );
+    return {
+      title: logicalFilter.find((item) => item.field === "title")?.value || "",
+      propertyType: logicalFilters.find((item)=> item.field === "propertyType")?.value || "",
+    };
+  }, [filters]);
 
   if (isLoading) return <Typography>Loading....</Typography>;
   if (isError) return <Typography>Error...</Typography>;
@@ -53,8 +70,8 @@ const AllProperties = () => {
               mb={{ xs: "20px", sm: 0 }}
             >
               <CustomButton
-                title={`Sort price`}
-                handleClick={() => {}}
+                title={`Sort price ${currentPrice === "asc" ? "↑" : "↓"}`}
+                handleClick={() => toggleSort("price")}
                 backgroundColor="#475be8"
                 color="#fcfcfc"
               />
@@ -62,8 +79,16 @@ const AllProperties = () => {
                 variant="outlined"
                 color="info"
                 placeholder="Search by title"
-                value=""
-                onChange={() => {}}
+                value={currentFilterValues.title}
+                onChange={(e) => {
+                  setFilters([
+                    {
+                      field: "title",
+                      operator: "contains",
+                      value: e.currentTarget.value ? e.currentTarget.value : undefined
+                    }
+                  ])
+                }}
               />
               <Select
                 variant="outlined"
@@ -72,10 +97,21 @@ const AllProperties = () => {
                 required
                 inputProps={{ "aria-label": "Without label" }}
                 defaultValue=""
-                value=""
-                onChange={() => {}}
+                value={currentFilterValues.propertyType}
+                onChange={(e) => {
+                  setFilters([
+                    {
+                      field: "propertyType",
+                      operator: "eq",
+                      value: e.target.value
+                    }
+                  ], "replace")
+                }}
               >
                 <MenuItem value="">All</MenuItem>
+                {["Apartment", "Villa", "Farmhouse", "Condos", "Townhouse", "Duplex", "Studio", "Chalet"].map((type)=>(
+                  <MenuItem key={type} value={type.toLowerCase()}>{type}</MenuItem>
+                ))}
               </Select>
             </Box>
           </Box>
@@ -141,7 +177,9 @@ const AllProperties = () => {
             onChange={() => {}}
           >
             {[10, 20, 30, 40, 50].map((size) => (
-              <MenuItem key={size} value={size}>Show{size}</MenuItem>
+              <MenuItem key={size} value={size}>
+                Show{size}
+              </MenuItem>
             ))}
           </Select>
         </Box>
