@@ -39,11 +39,33 @@ const PropertyDetails = () => {
       <Box
         mt="20px"
         display="flex"
-        flexDirection={{ xs: colum, lg: "row" }}
+        flexDirection={{ xs: "column", lg: "row" }}
         gap={4}
       >
-        
-
+        <Box flex={1} maxWidth={764}>
+          <img
+            src={propertyDetails.photo}
+            alt={propertyDetails.title}
+            height={546}
+            style={{ objectFit: "cover", borderRadius: "10px" }}
+            className="property_details-img"
+          />
+          <Box mt="15px">
+            <Stack
+              direction="row"
+              justifyContent="space-between"
+              flexWrap="wrap"
+              alignItems="center"
+            >
+              <Typography>{propertyDetails.propertyType}</Typography>
+              <Box>
+                {[1, 2, 3, 4, 5].map((star) => (
+                  <Star key={`star-${star}`} sx={{ color: "#f2c94c" }} />
+                ))}
+              </Box>
+            </Stack>
+          </Box>
+        </Box>
       </Box>
     </Box>
   );
