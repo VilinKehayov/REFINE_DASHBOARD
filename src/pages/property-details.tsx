@@ -57,12 +57,41 @@ const PropertyDetails = () => {
               flexWrap="wrap"
               alignItems="center"
             >
-              <Typography>{propertyDetails.propertyType}</Typography>
+              <Typography
+                fontSize={18}
+                fontWeight={500}
+                color="#11142d"
+                textTransform="capitalize"
+              >
+                {propertyDetails.propertyType}
+              </Typography>
               <Box>
                 {[1, 2, 3, 4, 5].map((star) => (
                   <Star key={`star-${star}`} sx={{ color: "#f2c94c" }} />
                 ))}
               </Box>
+            </Stack>
+            <Stack>
+              <Stack
+                direction="row"
+                justifyContent="space-between"
+                flexWrap="wrap"
+                alignItems="center"
+              >
+                <Typography
+                  fontSize={22}
+                  fontWeight={600}
+                  color="#11142d"
+                  textTransform="capitalize"
+                >
+                  {propertyDetails.title}
+                </Typography>
+
+                <Stack mt={0.5} direction="row" alignItems="center" gap={0.5}>
+                  <Place sx={{ color: "#808191" }} />
+                  <Typography>{propertyDetails.location}</Typography>
+                </Stack>
+              </Stack>
             </Stack>
           </Box>
         </Box>
