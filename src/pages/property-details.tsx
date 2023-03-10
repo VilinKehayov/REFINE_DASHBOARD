@@ -78,6 +78,7 @@ const PropertyDetails = () => {
                 flexWrap="wrap"
                 alignItems="center"
               >
+                <Box>
                 <Typography
                   fontSize={22}
                   fontWeight={600}
@@ -89,8 +90,9 @@ const PropertyDetails = () => {
 
                 <Stack mt={0.5} direction="row" alignItems="center" gap={0.5}>
                   <Place sx={{ color: "#808191" }} />
-                  <Typography>{propertyDetails.location}</Typography>
+                  <Typography fontSize={14} color="#808191">{propertyDetails.location}</Typography>
                 </Stack>
+                </Box>
               </Stack>
             </Stack>
           </Box>
